@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {act} from 'react-dom/test-utils'
 import {getQueriesForElement, prettyDOM, fireEvent} from 'dom-testing-library'
 
 const mountedContainers = new Set()
@@ -23,7 +24,9 @@ function render(
   if (hydrate) {
     ReactDOM.hydrate(ui, container)
   } else {
-    ReactDOM.render(ui, container)
+    act(() => {
+      ReactDOM.render(ui, container)
+    })
   }
   return {
     container,
